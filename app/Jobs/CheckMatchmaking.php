@@ -40,7 +40,8 @@ class CheckMatchmaking implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-
+        //Log::info("checking");
+        
         $MaxMatches = config('matchmaking.MaxMatches');
         $MatchingDepth = config('matchmaking.MatchingDepth');
 
@@ -58,6 +59,8 @@ class CheckMatchmaking implements ShouldQueue, ShouldBeUnique
         $usersWaiting = Matchmake::orderBy('created_at', 'asc')->take($MatchingDepth)->get();
 
         foreach ($usersWaiting as $userToMatch) {
+            //Log::info("matching");
+            
             if ($matchesMade >= $MaxMatches) return;
             if ($depth >= $MatchingDepth) return;
             if ($waiting <= 1) return;
@@ -87,9 +90,7 @@ class CheckMatchmaking implements ShouldQueue, ShouldBeUnique
                 continue;
             }
 
-
-            $game = Game::create(['white_team' => $user->id, 'black_team' => $userMatch->id, 'board' => DefaultBoard::Default_Board()]);
-
+            $game = Game::create(['white_team' => $user->id, 'black_team' => $userMatch->id]);
             // Send UserMatched event
             UserMatched::dispatch($user, $userMatch);
 
@@ -104,6 +105,6 @@ class CheckMatchmaking implements ShouldQueue, ShouldBeUnique
             $waiting = Matchmake::count();
         }
 
-
+        
     }
 }

@@ -22,6 +22,6 @@ Broadcast::channel('matchmaking.{userId}', function (User $user, int $userId) {
     return $user->id == $userId;
 });
 
-Broadcast::channel('game.{white}_{black}', function (User $user, string $white, string $black) {
-    return $user->id == $white || $user->id == $black;
+Broadcast::channel('game.{userId}', function (User $user, string $userId) {
+    return (int) $user->id == (int) $userId;
 });

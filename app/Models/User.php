@@ -65,6 +65,19 @@ class User extends Authenticatable implements MustVerifyEmail
         } else {
             return true;
         }
+        return false;
+    }
+
+    public function isMatchmaking(): bool {
+        if ($this->isPlayingGame()) {
+            return false;
+        }
+
+        $queue = Matchmake::where('user_id', '=', $this->id)->first();
+        if ($queue != null) {
+            return true;
+        }
+        return false;
     }
 
     public function getCurrentGame(): Game {
@@ -73,6 +86,42 @@ class User extends Authenticatable implements MustVerifyEmail
             return null;
         } else {
             return $current_game;
+        }
+    }
+
+    public function getOpponent(): User {
+        $current_game = $this->getCurrentGame();
+        if ($current_game == null) {
+            return null;
+        } else {
+            if ($current_game->white_team == $this->id) {
+                return User::findOrFail($current_game->black_team);
+            } else {
+                return User::findOrFail($current_game->white_team);
+            }
+        }
+    }
+
+    public function getState() {
+        if ($this->isPlayingGame()) {
+            return "playing";
+        } else if ($this->isMatchmaking()) {
+            return "finding";
+        } else {
+            return "none";
+        }
+    }
+
+    public function getBoardOrientation() {
+        $current_game = $this->getCurrentGame();
+        if ($current_game == null) {
+            return null;
+        } else {
+            if ($current_game->white_team == $this->id) {
+                return "white";
+            } else {
+                return "black";
+            }
         }
     }
 }

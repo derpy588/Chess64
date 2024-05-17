@@ -20,15 +20,18 @@ return new class extends Migration
             $table->integer('current_team')->default(Teams::White->value)->nullable();
             $table->foreignId('white_team')->on('users');
             $table->foreignId('black_team')->on('users');
-            $table->json('board');
+            //$table->json('board');
             $table->string('init_fen');
-            $table->integer('white_king')->default(-1);
-            $table->integer('black_king')->default(-1);
-            $table->integer('ep_square')->default(-1);
-            $table->integer('half_move_clock')->default(0);
-            $table->integer('move_number');
-            $table->integer('white_castling');
-            $table->integer('black_castling');
+            //$table->integer('white_king')->default(-1); // MAYBE REMOVE
+            //$table->integer('black_king')->default(-1); // MAYBE REMOVE
+            //$table->integer('ep_square')->default(-1);
+            //$table->integer('half_move_clock')->default(0);
+            //$table->integer('move_number'); // REMOVE
+            //$table->integer('white_castling');
+            //$table->integer('black_castling');
+            $table->string('current_fen');
+            $table->mediumText('pgn');
+            $table->timestamp('ended_at', $precision = 0)->nullable();
             $table->timestamps();
         });
     }

@@ -27,7 +27,7 @@ export default function Authenticated({ user, header, children }) {
     }
 
     return (
-        <div class="flex h-screen w-screen bg-gunmetal">
+        <div class="flex flex-col md:flex-row h-screen w-screen bg-gunmetal">
             {/* Nav bar menu stuff here */}
             <div class="flex flex-col hidden md:block bg-xdark-gray md:min-h-full md:w-80">
                 <div class="w-full mt-4 px-4 ">
@@ -52,7 +52,7 @@ export default function Authenticated({ user, header, children }) {
             </div>
             
             {/* Mobile menu pop out stuff */}
-            <Popover class="flex flex-row md:hidden w-full h-fit mx-auto bg-xdark-gray ">
+            <Popover class="flex flex-col md:hidden w-full h-fit mx-auto bg-xdark-gray ">
             
                 <Popover.Button class="h-11 w-11" onClick={navbar_toggle}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-full h-full p-2">
@@ -84,7 +84,6 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </Popover.Panel>
-
             </Popover>
 
             <div class="flex w-full h-full">

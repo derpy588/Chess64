@@ -173,7 +173,7 @@ export default function Board({ board_colors=['#779952', '#edeed1'], onMove, boa
     }
 
     return (
-        <div className={'flex flex-col overflow-hidden relative aspect-square w-[60rem] h-fit ma bg-gray-300 rounded '}>
+        <div className={'flex flex-col overflow-hidden relative aspect-square size-2/5 h-fit ma bg-gray-300 rounded '}>
             {squares}
 
             {renderSelectedSquare()}

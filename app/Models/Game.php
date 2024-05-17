@@ -13,6 +13,7 @@ use App\Enums\EPieceType;
 use App\Models\Move;
 use App\Enums\BitFlag;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Chess\Variant\Classical\Board;
 
 class Game extends Model
 {
@@ -27,18 +28,12 @@ class Game extends Model
     protected $attributes = [
         'winner' => null,
         'end_reason' => null,
-        'current_team' => Teams::White,
         'init_fen' => DefaultBoard::Default_Fen,
-        'white_king' => 4,
-        'black_king' => 116,
-        'ep_square' => EPieceType::empty,
-        'half_move_clock' => 0,
-        'move_number' => 1,
-        'white_castling' => BitFlag::KSide_Castle->value | BitFlag::QSide_Castle->value,
-        'black_castling' => BitFlag::KSide_Castle->value | BitFlag::QSide_Castle->value,
+        'current_fen' => DefaultBoard::Default_Fen,
+        'pgn' => "",
     ];
 
-    protected $fillable = ['white_team', 'black_team', 'board'];
+    protected $fillable = ['white_team', 'black_team'];
 
     /**
      * Conversion of columns
@@ -49,15 +44,14 @@ class Game extends Model
         'winner' => Teams::class,
         'end_reason' => EndReason::class,
         'current_team' => Teams::class,
-        'board' => asArrayObject::class,
     ];
 
-    public function white_team(): BelongsTo
+    public function getWhiteTeam(): BelongsTo
     {
         return $this->belongsTo(User::class, "white_team");
     }
 
-    public function black_team(): BelongsTo
+    public function getBlackTeam(): BelongsTo
     {
         return $this->belongsTo(User::class, "black_team");
     }
