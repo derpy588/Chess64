@@ -827,16 +827,16 @@
         },
         {
             "name": "chesslablab/php-chess",
-            "version": "1.4.17",
+            "version": "1.4.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chesslablab/php-chess.git",
-                "reference": "82b10270fa501c7d66b925a5c5eee9f3274c62a8"
+                "reference": "8e32ebec78355bbff3f8e72b2ecc51845394494d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chesslablab/php-chess/zipball/82b10270fa501c7d66b925a5c5eee9f3274c62a8",
-                "reference": "82b10270fa501c7d66b925a5c5eee9f3274c62a8",
+                "url": "https://api.github.com/repos/chesslablab/php-chess/zipball/8e32ebec78355bbff3f8e72b2ecc51845394494d",
+                "reference": "8e32ebec78355bbff3f8e72b2ecc51845394494d",
                 "shasum": ""
             },
             "require": {
@@ -883,15 +883,9 @@
             ],
             "support": {
                 "issues": "https://github.com/chesslablab/php-chess/issues",
-                "source": "https://github.com/chesslablab/php-chess/tree/1.4.17"
+                "source": "https://github.com/chesslablab/php-chess/tree/1.4.33"
             },
-            "funding": [
-                {
-                    "url": "https://chesslablab.org/support/",
-                    "type": "custom"
-                }
-            ],
-            "time": "2024-04-19T09:51:01+00:00"
+            "time": "2024-05-28T08:40:22+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

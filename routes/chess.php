@@ -13,7 +13,7 @@ Route::prefix('game')->group(function () {
         Route::get('/state', [ChessController::class, 'getState']);
         Route::get('/move/{san}', [ChessController::class, 'playerMove']);
 
-        Route::get('/v2', [ChessController::class, 'showV2']);
+        Route::get('/v2', [ChessController::class, 'showV2'])->name('dashboard');
         Route::get('/v2/state', [ChessController::class, 'getStateV2']);
         Route::get('/v2/get-board', [ChessController::class, 'getBoardV2']);
         Route::get('/v2/game', [ChessController::class, 'getCurrentGameV2']);

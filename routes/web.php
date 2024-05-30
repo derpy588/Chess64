@@ -18,14 +18,14 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return redirect('/game/v2');
+    return redirect('/login');
 });
 
 Route::get('/testing', function () {
     return Inertia::render('Testing');
 });
 
-Route::get('/dashboard', [ChessController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', [ChessController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

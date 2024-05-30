@@ -10,7 +10,6 @@ use App\Enums\EndReason;
 use App\Enums\Teams;
 use App\Utils\DefaultBoard;
 use App\Enums\EPieceType;
-use App\Models\Move;
 use App\Enums\BitFlag;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Chess\Variant\Classical\Board;
@@ -56,7 +55,5 @@ class Game extends Model
         return $this->belongsTo(User::class, "black_team");
     }
 
-    public function get_history(): HasMany {
-        return $this->hasMany(Move::class);
-    }
+    
 }

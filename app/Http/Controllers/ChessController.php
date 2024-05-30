@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\OpponentMoved;
 use Chess\Play\SanPlay;
 use App\Enums\Teams;
+use App\Enums\EndReason;
 
 class ChessController extends Controller
 {
@@ -212,8 +213,30 @@ class ChessController extends Controller
 
         $game->current_fen = $board->toFen();
         $game->pgn = $board->getMoveText();
-        
 
+        // Check if game ended
+        
+        $ended = $board->isMate() || $board->isStalemate() || $board->isFivefoldRepetition() || $board->isFiftyMoveDraw() || $board->isDeadPositionDraw();
+        if ($ended == false) { }
+        else {$game->ended_at = now();}
+
+        if ($board->isMate()) {
+            $winner = $tm->value;
+            $end = $winner == Teams::White->value ? EndReason::White_Win_By_Checkmate : EndReason::Black_Win_By_Checkmate;
+
+            $game->end_reason = $end->value;
+            //$game->winner = $tm;
+            
+        } elseif ($board->isStalemate()) {
+            $game->end_reason = EndReason::Draw_By_Stalemate->value;
+        } elseif ($board->isFivefoldRepetition()) {
+            $game->end_reason = EndReason::Draw_By_Repetition->value;
+        } elseif ($board->isFiftyMoveDraw()) {
+            $game->end_reason = EndReason::Draw_By_Repetition->value;
+        } elseif ($board->isDeadPositionDraw()) {
+            $game->end_reason = EndReason::Draw_By_Stalemate->value;
+        }
+        
         $game->save();
     }
 }
